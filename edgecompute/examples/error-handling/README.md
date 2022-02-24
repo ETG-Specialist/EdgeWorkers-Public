@@ -3,6 +3,7 @@ The examples in this section detail how to use EdgeWorkers to gracefully handle 
 
 ## Subfolder organization
 * **/origin-overload**: Translates an HTTP 503 status code (service unavailable) from an overloaded origin server to an HTML page that presents the information in a friendly way
+* **/custom-error-response-handling**: Describes instances where EdgeWorkers can be used to define error responses depending on reason for error
 
 ## Related Resources
 - [EdgeWorkers CLI](https://developer.akamai.com/cli/packages/edgeworkers.html)
