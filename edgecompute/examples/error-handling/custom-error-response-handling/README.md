@@ -68,7 +68,7 @@ Akamai Metadata workflow terminates on 403 deny and it wont allow Edgeworkers to
 Based on values of variables, logic has been handled in the Edgeworkers bundle to handle different JSON responses and also to add response headers.
 
 We also faced issues with scoping of the Edgeworkers execution within a variable match. EdgeWorkers behavior sets the EdgeWorkers ID in content policy stage and since variables execute much later in metadata processing , EW call template was not getting invoked . In below screenshot, EW was scoped to execute if the EPD is triggered
-
+![Screenshot](images/image1.png)
 
 Above rule translates into below metadata .Value of the variable - PMUSER_EPD_EXECUTED is only available in client request stage but EW_IN_ID is set in content policy stage within the match of variable and this was causing the issue of EW pearl not getting invoked
 
