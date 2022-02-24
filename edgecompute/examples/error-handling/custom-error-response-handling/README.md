@@ -13,7 +13,7 @@ In Akamai config , we would have implemented multiple security features like Geo
 In below example you can see that Akamai edge server gives back default (reference error) response for different types of scenarios
 
 ### Blocked by Geo location
-
+```
 curl -ik "https://sbharadwew.edgekey-staging.net" -H "X-forwarded-for:202.51.247.226" --connect-to ::e1.a.akamaiedge-staging.net
 
 HTTP/1.1 403 Forbidden\n
@@ -29,7 +29,8 @@ X-Akamai-Staging : ESSL
 You don't have permission to access "http://sbharadwew.edgekey-staging.net/" on this server.
 Reference #18.3da93017.1629167857.8f3f36f
 Blocked by Token Auth
-
+```
+```
 curl -ik "https://sbharadwew.edgekey-staging.net/?hdnea=exp=1629173184~acl=/*~hmac=195bf61c1ab33aa32a706723b68fec8dfa66b693cca70bbd083daadc1a4933b1" -H "X-forwar:52.66.193.64" --connect-to ::e1.a.akamaiedge-staging.net
 
 HTTP/1.1 403 Forbidden
@@ -45,7 +46,8 @@ X-Akamai-Staging : ESSL
 An error occurred while processing your request.
 Reference #219.3da93017.1629168391.8f478f3
 Blocked by EPD
-
+```
+```
 curl -ik "https://sbharadwew.edgekey-staging.net/?hdnea=exp=1629173184~acl=/*~hmac=195bf61c1ab33aa32a706723b68fec8dfa66b693cca70bbd083daadc1a4933b1" -H "X-forwar:52.66.193.64" --connect-to ::e1.a.akamaiedge-staging.net
 
 HTTP/1.1 403 Forbidden
@@ -60,7 +62,7 @@ X-Akamai-Staging : ESSL
 
 An error occurred while processing your request.
 Reference #219.3da93017.1629168391.8f478f3
-
+```
 ## Solution Workflow
 
 Akamai Metadata workflow terminates on 403 deny and it wont allow Edgeworkers to execute. We have used an approach where variables are set for different error scenarios and context is passed to Edgeworkers using variables
@@ -71,23 +73,23 @@ We also faced issues with scoping of the Edgeworkers execution within a variable
 ![Screenshot](images/image1.png)
 
 Above rule translates into below metadata .Value of the variable - PMUSER_EPD_EXECUTED is only available in client request stage but EW_IN_ID is set in content policy stage within the match of variable and this was causing the issue of EW pearl not getting invoked
-
+![Screenshot](images/image2.png)
 
 I removed the content policy stage and use advance behavior to allow pearl to execute on variable match
-
+![Screenshot](images/image3.png)
 
 Also in case of EPD, baseline hd.data executes the tag - auth:acl.deny and this ensures ghost terminates further metadata processing and will not allow Edgeworkers to execute. I have added workaround which allows the edgeworkers to execute on EPD deny action
 
 ### Check if EPD is executed
-
+![Screenshot](images/image4.png)
 
 ### Override the baseline EPD Deny action to allow EW to execute
-
+![Screenshot](images/image5.png)
 
 ## Test Results
 
 ### EPD Deny response
-
+```
 curl -ik "https://sbharadwew.edgekey-staging.net/?hdnea=exp=1629173184~acl=/*~hmac=195bf61c1ab33aa32a706723b68fec8dfa66b693cca70bbd083daadc1a4933b1" -H "X-forwarded-for:52.66.193.64" --connect-to ::e1.a.akamaiedge-staging.net
 
 HTTP/1.1 403 Forbidden
@@ -99,9 +101,9 @@ X-Akamai-Staging: ESSL
 EdgeworkerResponse: Response from Edgeworkers
 
 {"resultCode":"error","errorDescription":"AKA_EPD","message":"EPDblocked API","resultObj":{},"systemTime":"1592558179887"}
-
+```
 ### TA Deny response
-
+```
 curl -ik "https://sbharadwew.edgekey-staging.net" -H "X-forwarded-for:202.144.79.2" --connect-to ::e1.a.akamaiedge-staging.net
 
 HTTP/1.1 403 Forbidden
@@ -113,9 +115,9 @@ X-Akamai-Staging: ESSL
 EdgeworkerResponse: Response from Edgeworkers
 
 {"resultCode":"error","errorDescription":"AKA_TA","message":"Tokendeny API","resultObj":{},"systemTime":"1592558179887"}
-
+```
 ### GEO Deny response
-
+```
 curl -ik "https://sbharadwew.edgekey-staging.net" -H "X-forwarded-for:45.132.227.216" --connect-to ::e1.a.akamaiedge-staging.net
 
 HTTP/1.1 403 Forbidden
@@ -127,7 +129,7 @@ X-Akamai-Staging: ESSL
 EdgeworkerResponse: Response from Edgeworkers
 
 {"resultCode":"error","errorDescription":"AKA_GEO","message":"Geoblocked API","resultObj":{},"systemTime":"1592558179887"}
-
+```
 ## Additional Info
 
 Contact: Suhas Bharadwaj (​​sbharadw@akamai.com)
