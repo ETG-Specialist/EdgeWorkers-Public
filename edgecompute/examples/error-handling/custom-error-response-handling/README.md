@@ -1,10 +1,10 @@
 # Handling Custom Error Response using EdgeWorkers
 In this example, Edgeworkers is used to serve different error responses based on the deny feature which gets triggered in Akamai configuration.You can find the metadata sample and a working EW code that can be used for specific customer scenarios similar to this.
 
-Problem Statement and Use Case
-Solution Workflow
-Test Results
-Edgeworker Code
+- Problem Statement and Use Case
+- Solution Workflow
+- Test Results
+- Edgeworker Code
 
 ## Problem Statement and Use Case
 
