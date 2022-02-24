@@ -16,7 +16,7 @@ In below example you can see that Akamai edge server gives back default (referen
 
 curl -ik "https://sbharadwew.edgekey-staging.net" -H "X-forwarded-for:202.51.247.226" --connect-to ::e1.a.akamaiedge-staging.net
 
-HTTP/1.1 403 Forbidden
+HTTP/1.1 403 Forbidden\n
 Server : AkamaiGHost
 Mime-Version : 1.0
 Content-Type : text/html
