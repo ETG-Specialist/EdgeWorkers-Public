@@ -134,8 +134,8 @@ EdgeworkerResponse: Response from Edgeworkers
 ```
 ## Additional Info
 
-Contact: Suhas Bharadwaj (​​sbharadw@akamai.com)
-Property: sbharadw-ewtesting
-URL: https://sbharadwew.edgekey-staging.net/
-Account: Ion Premier Beta Jam 1
-EdgeWorker ID: 6284
+- Contact: Suhas Bharadwaj (sbharadw@akamai.com)
+- Property: sbharadw-ewtesting
+- URL: https://sbharadwew.edgekey-staging.net/
+- Account: Ion Premier Beta Jam 1
+- EdgeWorker ID: 6284
