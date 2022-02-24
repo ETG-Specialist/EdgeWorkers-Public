@@ -3,7 +3,7 @@ Examples here includes the device type (tablet or mobile or custom categorizatio
 
 ## Subfolder organization
 * **/cachekey-devicetype**: Add client device type into cache key to enable device-specific content caching without changing URL
-* **/Girnar Software - Example**: Classifies client device using custom User-Agent match and adds it to cache-key along with version information fetched from EdgeKV 
+* **/customer-girnar-software-example**: Classifies client device using custom User-Agent match and adds it to cache-key along with version information fetched from EdgeKV 
 
 ## Related Resources
 - [EdgeWorkers CLI](https://developer.akamai.com/cli/packages/edgeworkers.html)
