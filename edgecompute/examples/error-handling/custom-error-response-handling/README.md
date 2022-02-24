@@ -82,10 +82,10 @@ I removed the content policy stage and use advance behavior to allow pearl to ex
 
 Also in case of EPD, baseline hd.data executes the tag - auth:acl.deny and this ensures ghost terminates further metadata processing and will not allow Edgeworkers to execute. I have added workaround which allows the edgeworkers to execute on EPD deny action
 
-### Check if EPD is executed
+#### Check if EPD is executed
 ![Screenshot](images/image4.png)
 
-### Override the baseline EPD Deny action to allow EW to execute
+#### Override the baseline EPD Deny action to allow EW to execute
 ![Screenshot](images/image5.png)
 
 ## Test Results
