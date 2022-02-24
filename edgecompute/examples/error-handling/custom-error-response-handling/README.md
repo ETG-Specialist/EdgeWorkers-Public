@@ -6,13 +6,13 @@ Solution Workflow
 Test Results
 Edgeworker Code
 
-##Problem Statement and Use Case
+## Problem Statement and Use Case
 
 In Akamai config , we would have implemented multiple security features like Geo block, Token block, EPD, Path based ACL etc. Customers would need to return a custom JSON response based on the deny feature which got triggered and also add a response header for troubleshooting purposes.
 
 In below example you can see that Akamai edge server gives back default (reference error) response for different types of scenarios
 
-###Blocked by Geo location
+### Blocked by Geo location
 
 curl -ik "https://sbharadwew.edgekey-staging.net" -H "X-forwarded-for:202.51.247.226" --connect-to ::e1.a.akamaiedge-staging.net
 
@@ -61,7 +61,7 @@ X-Akamai-Staging : ESSL
 An error occurred while processing your request.
 Reference #219.3da93017.1629168391.8f478f3
 
-##Solution Workflow
+## Solution Workflow
 
 Akamai Metadata workflow terminates on 403 deny and it wont allow Edgeworkers to execute. We have used an approach where variables are set for different error scenarios and context is passed to Edgeworkers using variables
 
@@ -78,15 +78,15 @@ I removed the content policy stage and use advance behavior to allow pearl to ex
 
 Also in case of EPD, baseline hd.data executes the tag - auth:acl.deny and this ensures ghost terminates further metadata processing and will not allow Edgeworkers to execute. I have added workaround which allows the edgeworkers to execute on EPD deny action
 
-###Check if EPD is executed
+### Check if EPD is executed
 
 
-###Override the baseline EPD Deny action to allow EW to execute
+### Override the baseline EPD Deny action to allow EW to execute
 
 
-##Test Results
+## Test Results
 
-###EPD Deny response
+### EPD Deny response
 
 curl -ik "https://sbharadwew.edgekey-staging.net/?hdnea=exp=1629173184~acl=/*~hmac=195bf61c1ab33aa32a706723b68fec8dfa66b693cca70bbd083daadc1a4933b1" -H "X-forwarded-for:52.66.193.64" --connect-to ::e1.a.akamaiedge-staging.net
 
@@ -100,7 +100,7 @@ EdgeworkerResponse: Response from Edgeworkers
 
 {"resultCode":"error","errorDescription":"AKA_EPD","message":"EPDblocked API","resultObj":{},"systemTime":"1592558179887"}
 
-###TA Deny response
+### TA Deny response
 
 curl -ik "https://sbharadwew.edgekey-staging.net" -H "X-forwarded-for:202.144.79.2" --connect-to ::e1.a.akamaiedge-staging.net
 
@@ -114,7 +114,7 @@ EdgeworkerResponse: Response from Edgeworkers
 
 {"resultCode":"error","errorDescription":"AKA_TA","message":"Tokendeny API","resultObj":{},"systemTime":"1592558179887"}
 
-###GEO Deny response
+### GEO Deny response
 
 curl -ik "https://sbharadwew.edgekey-staging.net" -H "X-forwarded-for:45.132.227.216" --connect-to ::e1.a.akamaiedge-staging.net
 
@@ -128,7 +128,7 @@ EdgeworkerResponse: Response from Edgeworkers
 
 {"resultCode":"error","errorDescription":"AKA_GEO","message":"Geoblocked API","resultObj":{},"systemTime":"1592558179887"}
 
-##Additional Info
+## Additional Info
 
 Contact: Suhas Bharadwaj (​​sbharadw@akamai.com)
 Property: sbharadw-ewtesting
