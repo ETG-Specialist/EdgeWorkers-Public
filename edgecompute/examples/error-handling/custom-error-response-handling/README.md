@@ -12,7 +12,7 @@ In Akamai config , we would have implemented multiple security features like Geo
 
 In below example you can see that Akamai edge server gives back default (reference error) response for different types of scenarios
 
-### Blocked by Geo location
+#### Blocked by Geo location
 ```
 curl -ik "https://sbharadwew.edgekey-staging.net" -H "X-forwarded-for:202.51.247.226" --connect-to ::e1.a.akamaiedge-staging.net
 
@@ -28,8 +28,9 @@ X-Akamai-Staging : ESSL
 
 You don't have permission to access "http://sbharadwew.edgekey-staging.net/" on this server.
 Reference #18.3da93017.1629167857.8f3f36f
-Blocked by Token Auth
 ```
+
+#### Blocked by Token Auth
 ```
 curl -ik "https://sbharadwew.edgekey-staging.net/?hdnea=exp=1629173184~acl=/*~hmac=195bf61c1ab33aa32a706723b68fec8dfa66b693cca70bbd083daadc1a4933b1" -H "X-forwar:52.66.193.64" --connect-to ::e1.a.akamaiedge-staging.net
 
@@ -45,8 +46,9 @@ X-Akamai-Staging : ESSL
 
 An error occurred while processing your request.
 Reference #219.3da93017.1629168391.8f478f3
-Blocked by EPD
 ```
+
+#### Blocked by EPD
 ```
 curl -ik "https://sbharadwew.edgekey-staging.net/?hdnea=exp=1629173184~acl=/*~hmac=195bf61c1ab33aa32a706723b68fec8dfa66b693cca70bbd083daadc1a4933b1" -H "X-forwar:52.66.193.64" --connect-to ::e1.a.akamaiedge-staging.net
 
@@ -88,7 +90,7 @@ Also in case of EPD, baseline hd.data executes the tag - auth:acl.deny and this 
 
 ## Test Results
 
-### EPD Deny response
+#### EPD Deny response
 ```
 curl -ik "https://sbharadwew.edgekey-staging.net/?hdnea=exp=1629173184~acl=/*~hmac=195bf61c1ab33aa32a706723b68fec8dfa66b693cca70bbd083daadc1a4933b1" -H "X-forwarded-for:52.66.193.64" --connect-to ::e1.a.akamaiedge-staging.net
 
@@ -102,7 +104,7 @@ EdgeworkerResponse: Response from Edgeworkers
 
 {"resultCode":"error","errorDescription":"AKA_EPD","message":"EPDblocked API","resultObj":{},"systemTime":"1592558179887"}
 ```
-### TA Deny response
+#### TokenAuth Deny response
 ```
 curl -ik "https://sbharadwew.edgekey-staging.net" -H "X-forwarded-for:202.144.79.2" --connect-to ::e1.a.akamaiedge-staging.net
 
@@ -116,7 +118,7 @@ EdgeworkerResponse: Response from Edgeworkers
 
 {"resultCode":"error","errorDescription":"AKA_TA","message":"Tokendeny API","resultObj":{},"systemTime":"1592558179887"}
 ```
-### GEO Deny response
+#### GEO Deny response
 ```
 curl -ik "https://sbharadwew.edgekey-staging.net" -H "X-forwarded-for:45.132.227.216" --connect-to ::e1.a.akamaiedge-staging.net
 
